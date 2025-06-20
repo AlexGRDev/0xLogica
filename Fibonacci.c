@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fizzbuzz.c                                         :+:      :+:    :+:   */
+/*   Fibonacci.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexgarc4 <alexgarc4@student.42barcelon    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 12:48:49 by alexgarc4         #+#    #+#             */
-/*   Updated: 2025/06/20 08:28:18 by alexgarc4        ###   ########.fr       */
+/*   Created: 2025/06/20 08:16:26 by alexgarc4         #+#    #+#             */
+/*   Updated: 2025/06/20 10:09:50 by alexgarc4        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,41 +31,40 @@ int	putnbr(int n)
 	return (write(1, &n, 1));
 }
 
-int	fizzbuzz(int **n)
+int	fibonacci(int *n)
 {
-	if (**n % 3 == 0 && **n % 5 == 0)
-	{
-		write(1, "fizzbuzz\n", 9);
-	}
-	else if (**n % 3 == 0)
-	{
-		write(1, "fizz\n", 5);
-	}
-	else if (**n % 5 == 0)
-	{
-		write(1, "buzz\n", 5);
-	}
-	else
-	{
-		putnbr(**n);
-		write(1, "\n", 1);
-	}
-	return (putnbr(**n));
+	int	val1;
+	int	val2;
+
+	val1 = *n -1;
+	val2 = *n -2;
+	if (*n < 0)
+		return (0);
+	if (*n == 0)
+		return (0);
+	if (*n == 1)
+		return (1);
+	return (fibonacci(&val1) + fibonacci(&val2));
 }
 
 int	main(void)
 {
 	int	*n;
+	int	result;
 
-	n = malloc(sizeof(int *));
+	n = malloc(sizeof(int));
 	if (n == 0)
+	{
 		write(1, "Memory can't be assigned\n", 25);
+	}
 	*n = 0;
 	while (*n < 100)
 	{
-		fizzbuzz(&n);
+		result = fibonacci(n);
+		putnbr(result);
+		write(1, "\n", 1);
 		(*n)++;
 	}
-	free (n);
+	free(n);
 	return (0);
 }
