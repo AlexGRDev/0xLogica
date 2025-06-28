@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Norminette",
+			"type": "shell",
+			"command": "/Users/alexg/.venv/bin/norminette",
+			"args": [
+				"${file}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build Debug Executable",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-c",
+				"mkdir -p '${workspaceFolder}/build/Debug' && gcc -g -Wall -Werror -Wextra '${file}' -o '${workspaceFolder}/build/Debug/outDebug'"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"dependsOn": [
+				"Norminette"
+			],
+			"dependsOrder": "sequence"
+		}
+	]
+}
